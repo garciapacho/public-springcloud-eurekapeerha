@@ -1,0 +1,16 @@
+server:
+  port: 8770 
+eureka:
+  instance:
+    hostname: servicediscoveryserver1 
+    metadataMap.zone: us-east-1c
+  client:
+    register-with-eureka: true
+    fetch-registry: false    
+    region: us-east
+    availability-zones:
+      us-east: us-east-1c,us-east-1d
+    service-url:
+      us-east-1c: http://servicediscoveryserver1:8770/eureka/ 
+      us-east-1d: http://servicediscoveryserver2:8771/eureka/
+    

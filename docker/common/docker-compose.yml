@@ -1,0 +1,58 @@
+version: '2'
+services:
+  # service discovery replication
+  servicediscoveryserver1:
+     image:   garciapacho/garciapacho-servicediscoverysvr:garciapacho-servicediscoverysvr-tag
+     ports:
+       - "8770:8770"
+     environment:
+        EXTRA_ARGS: "-Deureka.server.waitTimeInMsWhenSyncEmpty=5 
+                    -Dspring.profiles.active=useast1c"         
+
+  servicediscoveryserver2: 
+     image:   garciapacho/garciapacho-servicediscoverysvr:garciapacho-servicediscoverysvr-tag
+     ports:
+       - "8771:8771"
+     environment:
+        EXTRA_ARGS: "-Dspring.profiles.active=useast1d 
+                    -Deureka.server.waitTimeInMsWhenSyncEmpty=5"    
+  
+  # service provider for each zone 
+  appservice1:
+      image: garciapacho/garciapacho-appservice:garciapacho-appservice-tag
+      ports:
+        - "8080:8080"
+      environment:
+        EUREKASERVER_HOSTNAME: "servicediscoveryserver1"
+        EUREKASERVER_PORT:   "8770"      
+        EXTRA_ARGS: "-Dspring.profiles.active=useast1c"
+
+
+  appservice2:
+      image: garciapacho/garciapacho-appservice:garciapacho-appservice-tag
+      ports:
+        - "8081:8081"
+      environment:
+        EUREKASERVER_HOSTNAME: "servicediscoveryserver2"
+        EUREKASERVER_PORT:   "8771"      
+        EXTRA_ARGS: "-Dspring.profiles.active=useast1d"
+
+  # service consumer for each zone
+  appclient1:
+      image: garciapacho/garciapacho-appclient:garciapacho-appclient-tag
+      ports:
+        - "8082:8082"
+      environment:
+        EUREKASERVER_HOSTNAME: "servicediscoveryserver1"
+        EUREKASERVER_PORT:   "8770"      
+        EXTRA_ARGS: "-Dspring.profiles.active=useast1c"
+
+  appclient2:
+      image: garciapacho/garciapacho-appclient:garciapacho-appclient-tag
+      ports:
+        - "8083:8083"
+      environment:
+        EUREKASERVER_HOSTNAME: "servicediscoveryserver2"
+        EUREKASERVER_PORT:   "8771"      
+        EXTRA_ARGS: "-Dspring.profiles.active=useast1d"
+

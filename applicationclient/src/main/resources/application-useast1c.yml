@@ -1,0 +1,13 @@
+server: 
+  port: 8082
+eureka: 
+  instance: 
+    metadataMap.zone: us-east-1c                         
+  client: 
+    region: us-east
+    availability-zones: 
+      us-east: us-east-1c,us-east-1d
+    service-url: 
+      us-east-1c: http://servicediscoveryserver1:8770/eureka/  
+      us-east-1d: http://servicediscoveryserver2:8771/eureka/
+  
