@@ -20,3 +20,18 @@ To start the docker image, change to the directory containing  your source code.
 
    **docker-compose -f docker/common/docker-compose.yml up**
 
+# Testing the services 
+To test the services, run a curl command (or use the browser) and verify the result:
+
+Service Discover Server(Eureka) endpoints:
+   **curl http://localhost:8770/eureka/apps/**
+   **curl http://localhost:8771/eureka/apps/**
+
+Service Provider Endpoints:
+   **curl http://localhost:8080/appservice/**
+   **curl http://localhost:8081/appservice/**
+    
+Service Provider Endpoints:
+   **curl http://localhost:8080/appclient/**
+   **curl http://localhost:8081/appclient/**
+    
