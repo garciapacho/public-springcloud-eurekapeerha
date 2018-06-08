@@ -1,8 +1,10 @@
 # Introduction
-Sample Spring Microservices - Service Discovery - Spring Cloud Netflix Eureka – HA y Peer-Awareness  
+Sample Spring Microservices - Service Discovery - Spring Cloud Netflix Eureka – HA y Peer-Awareness like this:
+
+![Eureka Architecture](https://raw.githubusercontent.com/Netflix/eureka/master/images/eureka_architecture.png)
 
 # Software needed
-1.	Apache Maven (http://maven.apache.org). 
+1.	Apache Maven (http://maven.apache.org) . 
 2.	Docker (http://docker.com). 
 
 # Building the Docker Images
